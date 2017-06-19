@@ -1,30 +1,14 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.android.tools.build:gradle:2.3.2'
     }
 }
-apply plugin: 'android-library'
 
 repositories {
-    mavenCentral()
-}
-
-android {
-    compileSdkVersion 19
-    buildToolsVersion "20"
-
-    defaultConfig {
-        minSdkVersion 14
-        versionName = VERSION_NAME
-        versionCode = VERSION_CODE
-    }
-}
-
-dependencies {
-
+    jcenter()
 }
 
 allprojects {
@@ -32,8 +16,21 @@ allprojects {
     group = GROUP
 
     repositories {
-        mavenCentral()
+        jcenter()
     }
 }
 
-apply from: 'maven.gradle'
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0'
+}
+
+ext {
+    MIN_SDK = 16
+    TARGET_SDK = 25
+    BUILD_TOOLS = '25.0.3'
+
+    final def supportVersion = '25.3.1'
+    SUPPORT_ANNOTATIONS = "com.android.support:support-annotations:$supportVersion"
+
+    CCF = 'ru.noties:ccf:1.0.0'
+}
